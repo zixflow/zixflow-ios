@@ -20,6 +20,13 @@ public class RichPushHttpClient: HttpClient {
     public func request(_ params: CioInternalCommon.HttpRequestParams, onComplete: @escaping (Result<Data, CioInternalCommon.HttpRequestError>) -> Void) {
         let logger = self.logger
         let jsonAdapter = self.jsonAdapter
+
+        // ZIXFLOW DEBUG: Log outgoing request
+        logger.info("🔵 ZIXFLOW REQUEST: \(params.method) \(params.url.absoluteString)", nil)
+        if let bodyData = params.body, let bodyString = String(data: bodyData, encoding: .utf8) {
+            logger.debug("🔵 ZIXFLOW REQUEST BODY: \(bodyString)", nil)
+        }
+
         httpRequestRunner
             .request(
                 params: params,
@@ -27,7 +34,7 @@ public class RichPushHttpClient: HttpClient {
             ) { data, response, error in
 
                 if let error = error {
-                    logger.error("Error sending request \(error.localizedDescription).")
+                    logger.error("🔴 ZIXFLOW ERROR: \(error.localizedDescription) for URL: \(params.url.absoluteString)", nil, error)
                     if let error = self.isUrlError(error) {
                         return onComplete(.failure(error))
                     }
@@ -39,12 +46,24 @@ public class RichPushHttpClient: HttpClient {
                             return onComplete(.failure(.noRequestMade(nil)))
                         }
 
+                        // ZIXFLOW DEBUG: Log successful response
+                        logger.info("🟢 ZIXFLOW RESPONSE: \(httpResponse.statusCode) for \(params.url.absoluteString)", nil)
+                        if let responseString = String(data: data, encoding: .utf8) {
+                            logger.debug("🟢 ZIXFLOW RESPONSE BODY: \(responseString)", nil)
+                        }
+
                         onComplete(.success(data))
                     } else {
+                        // ZIXFLOW DEBUG: Log error response
+                        logger.error("🔴 ZIXFLOW RESPONSE ERROR: \(httpResponse.statusCode) for \(params.url.absoluteString)", nil, nil)
+                        if let data = data, let responseString = String(data: data, encoding: .utf8) {
+                            logger.error("🔴 ZIXFLOW ERROR BODY: \(responseString)", nil, nil)
+                        }
+
                         logger.error("""
                         \(httpResponse.statusCode) HTTP status code response.
                         Error description: \(httpResponse.description)
-                        """)
+                        """, nil, nil)
 
                         let unsuccessfulStatusCodeError: HttpRequestError =
                             .unsuccessfulStatusCode(
@@ -143,9 +162,9 @@ extension RichPushHttpClient {
     static func getDefaultApiHost(region: Region) -> String {
         switch region {
         case .US:
-            "https://cdp.customer.io/v1"
+            "https://dev-events.zixflow.in/v1"
         case .EU:
-            "https://cdp-eu.customer.io/v1"
+            "https://dev-events.zixflow.in/v1"
         }
     }
 

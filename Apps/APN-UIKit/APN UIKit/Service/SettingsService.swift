@@ -5,7 +5,8 @@ class SettingsService {
     init(storage: Storage) {
         self.storage = storage
 
-        setDefaultSettings()
+        // Force reset settings to clear old cached values with /v1
+        setDefaultSettings(force: true)
     }
 
     func setDefaultSettings(force: Bool = false) {
@@ -33,8 +34,8 @@ class SettingsService {
                 region: .US
             ),
             internalSettings: InternalSettings(
-                cdnHost: "cdp.customer.io/v1",
-                apiHost: "cdp.customer.io/v1",
+                cdnHost: "dev-events.zixflow.in/v1",
+                apiHost: "dev-events.zixflow.in/v1",
                 inAppEnvironment: .Production,
                 testMode: true
             )

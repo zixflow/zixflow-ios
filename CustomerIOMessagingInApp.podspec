@@ -1,13 +1,13 @@
 Pod::Spec.new do |spec|
   spec.name         = "CustomerIOMessagingInApp"
-  spec.version      = "4.4.1" # Don't modify this line - it's automatically updated
-  spec.summary      = "Official Customer.io SDK for iOS."
-  spec.homepage     = "https://github.com/customerio/customerio-ios"
-  spec.documentation_url = 'https://customer.io/docs/sdk/ios/'
-  spec.changelog    = "https://github.com/customerio/customerio-ios/blob/#{spec.version.to_s}/CHANGELOG.md"
+  spec.version      = "4.4.1-zixflow.1" # Don't modify this line - it's automatically updated
+  spec.summary      = "Zixflow iOS SDK - In-App Messaging Module"
+  spec.homepage     = "https://github.com/zixflow/zixflow-ios"
+  spec.documentation_url = 'https://zixflow.com/docs/sdk/ios/'
+  spec.changelog    = "https://github.com/zixflow/zixflow-ios/blob/#{spec.version.to_s}/CHANGELOG.md"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
-  spec.author       = { "CustomerIO Team" => "win@customer.io" }
-  spec.source       = { :git => 'https://github.com/customerio/customerio-ios.git', :tag => spec.version.to_s }
+  spec.author       = { "Zixflow Team" => "support@zixflow.com" }
+  spec.source       = { :git => 'https://github.com/zixflow/zixflow-ios.git', :tag => spec.version.to_s }
 
   spec.swift_version = '5.3'
   spec.cocoapods_version = '>= 1.11.0'

@@ -30,6 +30,12 @@ class DataPipelineImplementation: DataPipelineInstance, DataPipelineTracking {
 
         self.contextPlugin = Context(diGraph: diGraph)
 
+        // ZIXFLOW DEBUG: Log SDK initialization with API endpoint
+        logger.info("🚀 ZIXFLOW SDK INITIALIZED", nil)
+        logger.info("🚀 API Host: \(moduleConfig.apiHost)", nil)
+        logger.info("🚀 CDN Host: \(moduleConfig.cdnHost)", nil)
+        logger.info("🚀 API Key: \(String(moduleConfig.cdpApiKey.prefix(10)))...", nil)
+
         initialize(diGraph: diGraph)
     }
 

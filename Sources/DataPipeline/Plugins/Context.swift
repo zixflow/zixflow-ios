@@ -10,15 +10,27 @@ class Context: Plugin {
     public var attributes: [String: Any] = [:]
 
     let userAgentUtil: UserAgentUtil
+    let logger: Logger
 
     public required init(diGraph: DIGraphShared) {
         self.userAgentUtil = diGraph.userAgentUtil
+        self.logger = diGraph.logger
     }
 
     public func execute<T: RawEvent>(event: T?) -> T? {
         guard var workingEvent = event,
               var context = workingEvent.context?.dictionaryValue
         else { return event }
+
+        // ZIXFLOW DEBUG: Log event being processed
+        logger.info("🟡 ZIXFLOW EVENT: \(workingEvent.type) - \(workingEvent.timestamp ?? "")", nil)
+        if let trackEvent = workingEvent as? TrackEvent {
+            logger.debug("🟡 ZIXFLOW TRACK: event=\(trackEvent.event ?? "unknown")", nil)
+        } else if let identifyEvent = workingEvent as? IdentifyEvent {
+            logger.debug("🟡 ZIXFLOW IDENTIFY: userId=\(identifyEvent.userId ?? "anonymous")", nil)
+        } else if let screenEvent = workingEvent as? ScreenEvent {
+            logger.debug("🟡 ZIXFLOW SCREEN: name=\(screenEvent.name ?? "unknown")", nil)
+        }
 
         do {
             // **Background queue migration safeguard:**

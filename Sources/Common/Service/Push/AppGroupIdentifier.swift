@@ -1,10 +1,10 @@
 import Foundation
 
-/// Customer.io shared App Group string: `group.{main_app_bundle_id}.cio` (entitlements + `FileManager`).
+/// Zixflow shared App Group string: `group.{main_app_bundle_id}.zixflow` (entitlements + `FileManager`).
 ///
 /// In an extension, `Bundle.main.bundleIdentifier` is the extension id; we strip known suffixes so it matches the main app.
 public enum AppGroupIdentifier {
-    public static let cioSuffix = "cio"
+    public static let cioSuffix = "zixflow"
 
     private static let extensionBundleSuffixes: [String] = [
         ".richpush",
@@ -13,7 +13,7 @@ public enum AppGroupIdentifier {
         ".richPush"
     ]
 
-    /// `group.{mainAppBundleId}.cio` — use when you already have the main app bundle id.
+    /// `group.{mainAppBundleId}.zixflow` — use when you already have the main app bundle id.
     public static func identifier(forMainAppBundleId mainAppBundleId: String) -> String {
         "group.\(mainAppBundleId).\(cioSuffix)"
     }

@@ -19,11 +19,11 @@ let package = Package(
         .target(
             name: "SampleAppsCommon",
             dependencies: [
-                // List the modules from the Customer.io iOS SDK that you actually use
-                .product(name: "DataPipelines", package: "customerio-ios"),
-                .product(name: "MessagingPushAPN", package: "customerio-ios"),
-                .product(name: "MessagingInApp", package: "customerio-ios"),
-                .product(name: "Location", package: "customerio-ios")
+                // List the modules from the Zixflow iOS SDK that you actually use
+                .product(name: "DataPipelines", package: "zixflow-ios"),
+                .product(name: "MessagingPushAPN", package: "zixflow-ios"),
+                .product(name: "MessagingInApp", package: "zixflow-ios"),
+                .product(name: "Location", package: "zixflow-ios")
             ],
             path: "Source"
         )
