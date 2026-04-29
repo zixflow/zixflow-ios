@@ -4,9 +4,7 @@ class SettingsService {
 
     init(storage: Storage) {
         self.storage = storage
-
-        // Force reset settings to clear old cached values with /v1
-        setDefaultSettings(force: true)
+        setDefaultSettings()
     }
 
     func setDefaultSettings(force: Bool = false) {
@@ -15,8 +13,8 @@ class SettingsService {
         storage.didSetDefaults = true
         storage.settings = Settings(
             dataPipelines: DataPipelinesSettings(
-                cdpApiKey: BuildEnvironment.CustomerIO.cdpApiKey,
-                siteId: BuildEnvironment.CustomerIO.siteId,
+                cdpApiKey: BuildEnvironment.Zixflow.cdpApiKey,
+                siteId: BuildEnvironment.Zixflow.siteId,
                 region: .US,
                 autoTrackDeviceAttributes: true,
                 autoTrackUIKitScreenViews: true,
@@ -30,7 +28,7 @@ class SettingsService {
                 showPushAppInForeground: true
             ),
             inApp: MessagingInAppSettings(
-                siteId: BuildEnvironment.CustomerIO.siteId,
+                siteId: BuildEnvironment.Zixflow.siteId,
                 region: .US
             ),
             internalSettings: InternalSettings(

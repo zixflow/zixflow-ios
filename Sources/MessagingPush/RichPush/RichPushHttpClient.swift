@@ -162,9 +162,9 @@ extension RichPushHttpClient {
     static func getDefaultApiHost(region: Region) -> String {
         switch region {
         case .US:
-            "https://dev-events.zixflow.in/v1"
+            "https://api-events.zixflow.com/v1"
         case .EU:
-            "https://dev-events.zixflow.in/v1"
+            "https://api-events.zixflow.com/v1"
         }
     }
 

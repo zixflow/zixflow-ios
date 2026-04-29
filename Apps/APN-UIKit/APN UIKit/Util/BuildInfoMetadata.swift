@@ -12,7 +12,7 @@ struct BuildInfoMetadata: CustomStringConvertible {
     let sdkIntegration: String
 
     init() {
-        self.sdkVersion = BuildInfoMetadata.resolveValidOrElse(BuildEnvironment.CustomerIO.sdkVersion) {
+        self.sdkVersion = BuildInfoMetadata.resolveValidOrElse(BuildEnvironment.Zixflow.sdkVersion) {
             "\(SdkVersion.version)-\(BuildInfoMetadata.resolveValidOrElse(BuildEnvironment.GitMetadata.commitsAheadCount) { "as-source" })"
         }
         self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -20,7 +20,7 @@ struct BuildInfoMetadata: CustomStringConvertible {
         let branchName = BuildEnvironment.GitMetadata.branchName
         let commitHash = BuildEnvironment.GitMetadata.commitHash
         self.gitMetadata = "\(BuildInfoMetadata.resolveValidOrElse(branchName) { "development build" })-\(BuildInfoMetadata.resolveValidOrElse(commitHash) { "untracked" })"
-        self.defaultWorkspace = BuildInfoMetadata.resolveValidOrElse(BuildEnvironment.CustomerIO.workspaceName)
+        self.defaultWorkspace = BuildInfoMetadata.resolveValidOrElse(BuildEnvironment.Zixflow.workspaceName)
         self.language = BuildInfoMetadata.resolveValidOrElse("Swift")
         self.uiFramework = BuildInfoMetadata.resolveValidOrElse("UIKit (Storyboard)")
         self.sdkIntegration = BuildInfoMetadata.resolveValidOrElse("Swift Package Manager (SPM)")

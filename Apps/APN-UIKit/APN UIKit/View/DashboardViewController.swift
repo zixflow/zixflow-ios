@@ -112,14 +112,14 @@ class DashboardViewController: BaseViewController {
         if let email = storage.userEmailId {
             userEmailLabel.text = email
         }
-        deviceTokenLabel.text = CustomerIO.shared.registeredDeviceToken ?? "Not Registered"
+        deviceTokenLabel.text = Zixflow.shared.registeredDeviceToken ?? "Not Registered"
     }
 
     // MARK: - Actions
 
     @IBAction func logoutUser(_ sender: UIButton) {
         storage.userEmailId = nil
-        CustomerIO.shared.clearIdentify()
+        Zixflow.shared.clearIdentify()
         dashboardRouter?.routeToLogin()
     }
 
@@ -131,10 +131,10 @@ class DashboardViewController: BaseViewController {
         }
         showToast(withMessage: "Random event  tracked successfully")
         if let data = randomEventInfo["data"] as? [String: Any] {
-            CustomerIO.shared.track(name: name, properties: data)
+            Zixflow.shared.track(name: name, properties: data)
             return
         }
-        CustomerIO.shared.track(name: name)
+        Zixflow.shared.track(name: name)
     }
 
     @IBAction func sendCustomEvent(_ sender: UIButton) {

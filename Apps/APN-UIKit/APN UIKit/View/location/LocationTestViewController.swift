@@ -57,7 +57,7 @@ class LocationTestViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
-        CustomerIO.shared.screen(title: "Location Test")
+        Zixflow.shared.screen(title: "Location Test")
         addKeyboardObservers()
     }
 

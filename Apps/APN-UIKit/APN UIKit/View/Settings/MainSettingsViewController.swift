@@ -76,7 +76,7 @@ class MainSettingsViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
 
-        CustomerIO.shared.screen(title: screenName, properties: [:])
+        Zixflow.shared.screen(title: screenName, properties: [:])
     }
 
     private func setInitialValues() {

@@ -14,7 +14,7 @@ extension LocationTestViewController {
     func setLocation(latitude: Double, longitude: Double, sourceName: String? = nil) {
         let location = CLLocation(latitude: latitude, longitude: longitude)
 
-        CustomerIO.location.setLastKnownLocation(location)
+        Zixflow.location.setLastKnownLocation(location)
 
         let sourceText = sourceName.map { " (\($0))" } ?? ""
         lastSetLocationLabel.text = "Last set: \(latitude), \(longitude)\(sourceText)"
@@ -86,7 +86,7 @@ extension LocationTestViewController {
             locationManager.requestWhenInUseAuthorization()
         case .authorizedWhenInUse, .authorizedAlways:
             lastSetLocationLabel.text = "Requesting location once (SDK)..."
-            CustomerIO.location.requestLocationUpdate()
+            Zixflow.location.requestLocationUpdate()
             showToast(withMessage: "SDK requested location update")
         case .denied, .restricted:
             showLocationPermissionAlert()

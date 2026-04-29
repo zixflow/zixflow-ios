@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Registers the `AppDelegate` class to handle when a push notification gets clicked.
          This line of code is optional and only required if you have custom code that needs to run when a push notification gets clicked on.
-         Push notifications sent by Customer.io will be handled by the Customer.io SDK automatically, unless you disabled that feature.
-         Therefore, this line of code is not required if you only want to handle push notifications sent by Customer.io.
+         Push notifications sent by Zixflow will be handled by the Zixflow SDK automatically, unless you disabled that feature.
+         Therefore, this line of code is not required if you only want to handle push notifications sent by Zixflow.
          */
 //        UNUserNotificationCenter.current().delegate = self
 
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set default setting if those don't exist
         DIGraphShared.shared.settingsService.setDefaultSettings()
 
-        // Initialize CustomerIO SDK
+        // Initialize Zixflow SDK
         guard let settings = storage.settings else {
             assertionFailure("Settings should not be nil")
             return
@@ -59,9 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             config.flushAt(1)
         }
         config.addModule(LocationModule(config: LocationConfig(mode: .onAppStart)))
-        CustomerIO.initialize(withConfig: config.build())
+        Zixflow.initialize(withConfig: config.build())
 
-        // Initialize messaging features after initializing Customer.io SDK
+        // Initialize messaging features after initializing Zixflow SDK
         MessagingPushAPN.initialize(
             withConfig: MessagingPushConfigBuilder()
                 .autoFetchDeviceToken(settings.messaging.autoFetchDeviceToken)
@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .setEventListener(self)
     }
 
-    // Handle Universal Link deep link from the Customer.io SDK. This function will get called if a push notification
+    // Handle Universal Link deep link from the Zixflow SDK. This function will get called if a push notification
     // gets clicked that has a Universal Link deep link attached and the app is in the foreground. Otherwise, another function
     // in your app may get called depending on what technology you use (Scenes, UIKit, Swift UI).
     //
@@ -118,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 //        // Track custom event with Customer.io.
 //        // NOT required for basic PN tap tracking - that is done automatically with `CioAppDelegateWrapper`.
-//        CustomerIO.shared.track(
+//        Zixflow.shared.track(
 //            name: "custom push-clicked event",
 //            properties: ["push": response.notification.request.content.userInfo]
 //        )
@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: InAppEventListener {
     // Message is sent and shown to the user
     nonisolated func messageShown(message: InAppMessage) {
-        CustomerIO.shared.track(
+        Zixflow.shared.track(
             name: "inapp shown",
             properties: ["delivery-id": message.deliveryId ?? "(none)", "message-id": message.messageId]
         )
@@ -145,7 +145,7 @@ extension AppDelegate: InAppEventListener {
 
     // User taps X (close) button and in-app message is dismissed
     nonisolated func messageDismissed(message: InAppMessage) {
-        CustomerIO.shared.track(
+        Zixflow.shared.track(
             name: "inapp dismissed",
             properties: ["delivery-id": message.deliveryId ?? "(none)", "message-id": message.messageId]
         )
@@ -153,7 +153,7 @@ extension AppDelegate: InAppEventListener {
 
     // In-app message produces an error - preventing message from appearing to the user
     nonisolated func errorWithMessage(message: InAppMessage) {
-        CustomerIO.shared.track(
+        Zixflow.shared.track(
             name: "inapp error",
             properties: ["delivery-id": message.deliveryId ?? "(none)", "message-id": message.messageId]
         )
@@ -164,7 +164,7 @@ extension AppDelegate: InAppEventListener {
         if actionName == "remove" || actionName == "test" {
             MessagingInApp.shared.dismissMessage()
         }
-        CustomerIO.shared.track(name: "inapp action", properties: [
+        Zixflow.shared.track(name: "inapp action", properties: [
             "delivery-id": message.deliveryId ?? "(none)",
             "message-id": message.messageId,
             "action-value": actionValue,

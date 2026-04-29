@@ -60,7 +60,7 @@ extension LocationTestViewController: @MainActor CLLocationManagerDelegate {
             switch status {
             case .authorizedWhenInUse, .authorizedAlways:
                 lastSetLocationLabel.text = "Requested location once (SDK)..."
-                CustomerIO.location.requestLocationUpdate()
+                Zixflow.location.requestLocationUpdate()
                 showToast(withMessage: "SDK requested location update")
             case .denied, .restricted:
                 showLocationPermissionAlert()

@@ -6,7 +6,7 @@ import UserNotifications
 class NotificationService: UNNotificationServiceExtension {
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         MessagingPushAPN.initializeForExtension(
-            withConfig: MessagingPushConfigBuilder(cdpApiKey: BuildEnvironment.CustomerIO.cdpApiKey)
+            withConfig: MessagingPushConfigBuilder(cdpApiKey: BuildEnvironment.Zixflow.cdpApiKey)
                 .logLevel(.debug)
                 .appGroupId("group.io.customer.ios-sample.apn-spm.APN-UIKit.cio")
                 .build()

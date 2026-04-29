@@ -11,3 +11,6 @@ public typealias CustomerIO = CioInternalCommon.CustomerIO
 public typealias CioLogLevel = CioInternalCommon.CioLogLevel
 public typealias Region = CioInternalCommon.Region
 public typealias ScreenView = CioInternalCommon.ScreenView
+
+// Zixflow-branded alias for customer-facing API
+public typealias Zixflow = CustomerIO

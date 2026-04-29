@@ -95,7 +95,7 @@ class LoginViewController: BaseViewController {
         }
         storage.userEmailId = emailId
         loginRouter?.routeToDashboard()
-        CustomerIO.shared.identify(userId: emailId, traits: body)
+        Zixflow.shared.identify(userId: emailId, traits: body)
     }
 
     @objc func settingsTapped() {

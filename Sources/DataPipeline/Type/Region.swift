@@ -4,15 +4,15 @@ import CioInternalCommon
 extension Region {
     var apiHost: String {
         switch self {
-        case .US: return "dev-events.zixflow.in/v1"
-        case .EU: return "dev-events.zixflow.in/v1"
+        case .US: return "api-events.zixflow.com/v1"
+        case .EU: return "api-events.zixflow.com/v1"
         }
     }
 
     var cdnHost: String {
         switch self {
-        case .US: return "dev-events.zixflow.in/v1"
-        case .EU: return "dev-events.zixflow.in/v1"
+        case .US: return "api-events.zixflow.com/v1"
+        case .EU: return "api-events.zixflow.com/v1"
         }
     }
 }

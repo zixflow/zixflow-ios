@@ -39,11 +39,11 @@ class InternalSettingsViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
 
-        CustomerIO.shared.screen(title: screenName, properties: [:])
+        Zixflow.shared.screen(title: screenName, properties: [:])
     }
 
     func setInitialValues() {
-        workspaceNameLabel.text = BuildEnvironment.CustomerIO.workspaceName
+        workspaceNameLabel.text = BuildEnvironment.Zixflow.workspaceName
 
         cdnHostTextField.text = settingsViewModel.settings.internalSettings.cdnHost
         apiHostTextField.text = settingsViewModel.settings.internalSettings.apiHost

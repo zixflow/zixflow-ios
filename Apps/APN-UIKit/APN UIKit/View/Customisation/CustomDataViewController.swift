@@ -80,13 +80,13 @@ class CustomDataViewController: BaseViewController {
         var toastMessage = ""
         if source == .customEvents {
             guard let eventName = eventNameTextField.text else { return }
-            CustomerIO.shared.track(name: eventName, properties: [propName: propValue])
+            Zixflow.shared.track(name: eventName, properties: [propName: propValue])
             toastMessage = "Custom event tracked successfully"
         } else if source == .deviceAttributes {
-            CustomerIO.shared.deviceAttributes = [propName: propValue]
+            Zixflow.shared.deviceAttributes = [propName: propValue]
             toastMessage = "Device attribute set successfully."
         } else if source == .profileAttributes {
-            CustomerIO.shared.setProfileAttributes([propName: propValue])
+            Zixflow.shared.setProfileAttributes([propName: propValue])
             toastMessage = "Profile attribute set successfully."
         }
         if canEventFail() {
