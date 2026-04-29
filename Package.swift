@@ -33,7 +33,7 @@ if (ProcessInfo.processInfo.environment["CI"] != nil) { // true if running on a 
 }
 
 let package = Package(
-    name: "Customer.io",
+    name: "Zixflow",
     platforms: [
         .iOS(.v13)
     ],
@@ -46,7 +46,8 @@ let package = Package(
         
 
         // Make sure the version number is same for DataPipelines cocoapods.
-        .package(name: "CioAnalytics", url: "https://github.com/customerio/cdp-analytics-swift.git", .exact("1.7.3+cio.1")),
+        // Using Zixflow fork with authentication header fix
+        .package(name: "CioAnalytics", url: "https://github.com/zixflow/cdp-analytics-swift.git", .exact("1.7.3+zixflow.1")),
         
         // SSE (Server-Sent Events) client for real-time in-app messaging
         .package(url: "https://github.com/LaunchDarkly/swift-eventsource.git", .upToNextMajor(from: "3.3.0"))
